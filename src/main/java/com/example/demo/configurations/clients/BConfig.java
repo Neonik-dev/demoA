@@ -1,4 +1,4 @@
-package com.example.demo.configurations;
+package com.example.demo.configurations.clients;
 
 import lombok.Getter;
 import lombok.Setter;

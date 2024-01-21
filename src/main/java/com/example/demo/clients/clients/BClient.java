@@ -1,7 +1,7 @@
 package com.example.demo.clients.clients;
 
 import com.example.demo.clients.dto.MsgB;
-import com.example.demo.configurations.BConfig;
+import com.example.demo.configurations.clients.BConfig;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
