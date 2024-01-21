@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties(prefix = "client.gismeteo")
-public class GismeteoConfig {
+@ConfigurationProperties(prefix = "client.openweather")
+public class OpenWeatherConfig {
     private String baseUrl;
-    private String token;
+    private String appId;
 }
