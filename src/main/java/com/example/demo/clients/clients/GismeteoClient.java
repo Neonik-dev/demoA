@@ -1,6 +1,5 @@
 package com.example.demo.clients.clients;
 
-import com.example.demo.configurations.clients.BConfig;
 import com.example.demo.configurations.clients.GismeteoConfig;
 import com.example.demo.dto.Coordinates;
 import org.springframework.core.ParameterizedTypeReference;
@@ -9,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Map;
 
-@Component
+@Component(value = "Gismeteo")
 public class GismeteoClient implements IOuterSiteClient {
     private static final String HEADER_GISMETEO_TOKEN = "X-Gismeteo-Token";
     private static final String PARAM_LAT = "latitude";

@@ -3,10 +3,12 @@ package com.example.demo.clients.clients;
 import com.example.demo.configurations.clients.OpenWeatherConfig;
 import com.example.demo.dto.Coordinates;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Map;
 
+@Component(value = "OpenWeather")
 public class OpenWeatherClient implements IOuterSiteClient {
     private static final String PARAM_APP_ID = "appid";
     private static final String PARAM_LAT = "lat";
