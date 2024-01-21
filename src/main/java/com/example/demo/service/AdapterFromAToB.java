@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
 public class AdapterFromAToB implements IAdapterService {
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'h:m:ss.ssXXX");
     private final BClient bClient;
     @Qualifier(value = "Gismeteo")
     private final IOuterSiteClient gismeteoClient;
@@ -26,9 +28,8 @@ public class AdapterFromAToB implements IAdapterService {
         if (!isValid(msgA)) {
             return;
         }
-
-
-        sendToB(new MsgB("4",  LocalDateTime.now(), 4));
+        MsgB msgB = formingMsgB(msgA);
+        sendToB(msgB);
     }
 
     private MsgB formingMsgB(MsgA msgA) {
@@ -38,10 +39,13 @@ public class AdapterFromAToB implements IAdapterService {
         return Mono.zip(
                 gismeteoResponse,
                 openWeatherResponse,
-                (person, hobbies) -> new MsgB(
+                (gismeteo, openWeather) -> new MsgB(
                         msgA.msg(),
-                        LocalDateTime.now(),
-                        2
+                        DATE_FORMAT.format(new Date()),
+                        (
+                                Integer.parseInt(gismeteo.get("temperature"))
+                                        + Integer.parseInt(openWeather.get("temperature"))
+                        ) / 2
                 )
         ).block();
     }
