@@ -5,6 +5,7 @@ import com.example.demo.dto.Coordinates;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -25,13 +26,13 @@ public class OpenWeatherClient implements IOuterSiteClient {
     }
 
     @Override
-    public Map<String, String> getInfoByCoordinates(Coordinates coordinates) {
+    public Mono<Map<String, String>> getInfoByCoordinates(Coordinates coordinates) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam(PARAM_LAT, coordinates.latitude())
                         .queryParam(PARAM_LON, coordinates.longitude())
                         .queryParam(PARAM_APP_ID, config.getAppId())
                         .build()
-                ).retrieve().bodyToMono(MAP_RESPONSE).block();
+                ).retrieve().bodyToMono(MAP_RESPONSE);
     }
 }
