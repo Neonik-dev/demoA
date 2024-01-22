@@ -29,7 +29,7 @@ public class AdapterFromAToB implements IAdapterService {
             return;
         }
         MsgB msgB = formingMsgB(msgA);
-        sendToB(msgB);
+        bClient.sendMsg(msgB);
     }
 
     private MsgB formingMsgB(MsgA msgA) {
@@ -52,9 +52,5 @@ public class AdapterFromAToB implements IAdapterService {
 
     private boolean isValid(MsgA msgA) {
         return LngEnum.fromString(msgA.lng()) == LngEnum.RU;
-    }
-
-    private void sendToB(MsgB msgB) {
-        bClient.sendMsg(msgB);
     }
 }

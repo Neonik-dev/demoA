@@ -15,11 +15,9 @@ public class BClient {
     }
 
     public void sendMsg(MsgB msgB) {
-        System.out.println(msgB);
         webClient.post().uri("/message")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(msgB)
                 .retrieve().bodyToMono(Void.class).block();
-        System.out.println("good");
     }
 }

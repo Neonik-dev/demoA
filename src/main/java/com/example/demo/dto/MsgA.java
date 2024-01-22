@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record MsgA(
-        @NotBlank
+        @NotBlank(message = "The message cannot be empty")
         String msg,
         @NotNull
         String lng,
